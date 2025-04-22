@@ -1,0 +1,664 @@
+{
+  "tickets": [
+    {
+      "id": "1",
+      "title": "Login Issue",
+      "description": "User cannot log into the system.",
+      "creation_date": "2023-10-01T10:00:00Z",
+      "update_date": "2023-10-01T12:00:00Z",
+      "impact": "Blocking",
+      "status": "Open",
+      "creator_user": {
+        "id": "u001",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "last_login_date": "2023-09-30T09:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc001",
+        "assigned_user": {
+          "id": "u002",
+          "name": "Jane Smith",
+          "email": "jane.smith@example.com",
+          "password": "password456",
+          "last_login_date": "2023-09-29T08:30:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Intel i7, 16GB RAM, 512GB SSD"
+      },
+      "request_type": "Technical Support"
+    },
+    {
+      "id": "2",
+      "title": "Printer Not Working",
+      "description": "The office printer is out of order.",
+      "creation_date": "2023-10-02T09:00:00Z",
+      "update_date": "2023-10-02T10:00:00Z",
+      "impact": "Major",
+      "status": "In Progress",
+      "creator_user": {
+        "id": "u003",
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "password": "password789",
+        "last_login_date": "2023-09-28T11:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc002",
+        "assigned_user": {
+          "id": "u004",
+          "name": "Bob Brown",
+          "email": "bob.brown@example.com",
+          "password": "password101",
+          "last_login_date": "2023-09-27T14:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In maintenance",
+        "configuration": "HP LaserJet, Network Printer"
+      },
+      "request_type": "Hardware Issue"
+    },
+    {
+      "id": "3",
+      "title": "Software Installation Request",
+      "description": "Need to install new software on the computer.",
+      "creation_date": "2023-10-03T08:30:00Z",
+      "update_date": "2023-10-03T09:00:00Z",
+      "impact": "Minor",
+      "status": "Open",
+      "creator_user": {
+        "id": "u005",
+        "name": "Charlie Green",
+        "email": "charlie.green@example.com",
+        "password": "password202",
+        "last_login_date": "2023-09-26T15:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc003",
+        "assigned_user": {
+          "id": "u006",
+          "name": "Diana White",
+          "email": "diana.white@example.com",
+          "password": "password303",
+          "last_login_date": "2023-09-25T16:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Dell XPS, 16GB RAM, 1TB HDD"
+      },
+      "request_type": "Software Request"
+    },
+    {
+      "id": "4",
+      "title": "Network Connectivity Issue",
+      "description": "User cannot connect to the Wi-Fi.",
+      "creation_date": "2023-10-04T11:00:00Z",
+      "update_date": "2023-10-04T12:00:00Z",
+      "impact": "Blocking",
+      "status": "Open",
+      "creator_user": {
+        "id": "u007",
+        "name": "Eve Black",
+        "email": "eve.black@example.com",
+        "password": "password404",
+        "last_login_date": "2023-09-24T17:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc004",
+        "assigned_user": {
+          "id": "u008",
+          "name": "Frank Blue",
+          "email": "frank.blue@example.com",
+          "password": "password505",
+          "last_login_date": "2023-09-23T18:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "MacBook Pro, 16GB RAM, 256GB SSD"
+      },
+      "request_type": "Network Issue"
+    },
+    {
+      "id": "5",
+      "title": "Password Reset",
+      "description": "User needs to reset their password.",
+      "creation_date": "2023-10-05T14:00:00Z",
+      "update_date": "2023-10-05T15:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u009",
+        "name": "Grace Yellow",
+        "email": "grace.yellow@example.com",
+        "password": "password606",
+        "last_login_date": "2023-09-22T19:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc005",
+        "assigned_user": {
+          "id": "u010",
+          "name": "Hank Red",
+          "email": "hank.red@example.com",
+          "password": "password707",
+          "last_login_date": "2023-09-21T20:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Lenovo ThinkPad, 8GB RAM, 256GB SSD"
+      },
+      "request_type": "Account Issue"
+    },
+    {
+      "id": "6",
+      "title": "Email Configuration",
+      "description": "User needs help configuring their email.",
+      "creation_date": "2023-10-06T09:00:00Z",
+      "update_date": "2023-10-06T10:00:00Z",
+      "impact": "Major",
+      "status": "In Progress",
+      "creator_user": {
+        "id": "u011",
+        "name": "Ivy Pink",
+        "email": "ivy.pink@example.com",
+        "password": "password808",
+        "last_login_date": "2023-09-20T21:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc006",
+        "assigned_user": {
+          "id": "u012",
+          "name": "Jack Gray",
+          "email": "jack.gray@example.com",
+          "password": "password909",
+          "last_login_date": "2023-09-19T22:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Acer Aspire, 12GB RAM, 1TB HDD"
+      },
+      "request_type": "Email Support"
+    },
+    {
+      "id": "7",
+      "title": "Hardware Upgrade Request",
+      "description": "Request for hardware upgrade on the computer.",
+      "creation_date": "2023-10-07T12:00:00Z",
+      "update_date": "2023-10-07T13:00:00Z",
+      "impact": "Minor",
+      "status": "Open",
+      "creator_user": {
+        "id": "u013",
+        "name": "Liam Orange",
+        "email": "liam.orange@example.com",
+        "password": "password1010",
+        "last_login_date": "2023-09-18T23:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc007",
+        "assigned_user": {
+          "id": "u014",
+          "name": "Mia Violet",
+          "email": "mia.violet@example.com",
+          "password": "password1111",
+          "last_login_date": "2023-09-17T00:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Asus ZenBook, 16GB RAM, 512GB SSD"
+      },
+      "request_type": "Hardware Request"
+    },
+    {
+      "id": "8",
+      "title": "Malware Detection",
+      "description": "Malware detected on the user's computer.",
+      "creation_date": "2023-10-08T14:00:00Z",
+      "update_date": "2023-10-08T15:00:00Z",
+      "impact": "Blocking",
+      "status": "Open",
+      "creator_user": {
+        "id": "u015",
+        "name": "Noah Indigo",
+        "email": "noah.indigo@example.com",
+        "password": "password1212",
+        "last_login_date": "2023-09-16T01:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc008",
+        "assigned_user": {
+          "id": "u016",
+          "name": "Olivia Teal",
+          "email": "olivia.teal@example.com",
+          "password": "password1313",
+          "last_login_date": "2023-09-15T02:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "HP Pavilion, 8GB RAM, 1TB HDD"
+      },
+      "request_type": "Security Issue"
+    },
+    {
+      "id": "9",
+      "title": "Backup Request",
+      "description": "User requests a backup of their files.",
+      "creation_date": "2023-10-09T10:00:00Z",
+      "update_date": "2023-10-09T11:00:00Z",
+      "impact": "Major",
+      "status": "In Progress",
+      "creator_user": {
+        "id": "u017",
+        "name": "Parker Brown",
+        "email": "parker.brown@example.com",
+        "password": "password1414",
+        "last_login_date": "2023-09-14T03:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc009",
+        "assigned_user": {
+          "id": "u018",
+          "name": "Quinn Black",
+          "email": "quinn.black@example.com",
+          "password": "password1515",
+          "last_login_date": "2023-09-13T04:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Microsoft Surface, 16GB RAM, 256GB SSD"
+      },
+      "request_type": "Data Management"
+    },
+    {
+      "id": "10",
+      "title": "VPN Setup",
+      "description": "User needs help setting up a VPN.",
+      "creation_date": "2023-10-10T12:00:00Z",
+      "update_date": "2023-10-10T13:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u019",
+        "name": "Riley Gray",
+        "email": "riley.gray@example.com",
+        "password": "password1616",
+        "last_login_date": "2023-09-12T05:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc010",
+        "assigned_user": {
+          "id": "u020",
+          "name": "Samantha White",
+          "email": "samantha.white@example.com",
+          "password": "password1717",
+          "last_login_date": "2023-09-11T06:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Lenovo Yoga, 8GB RAM, 512GB SSD"
+      },
+      "request_type": "Network Setup"
+    },
+    {
+      "id": "11",
+      "title": "File Sharing Issue",
+      "description": "User cannot share files on the network.",
+      "creation_date": "2023-10-11T14:00:00Z",
+      "update_date": "2023-10-11T15:00:00Z",
+      "impact": "Major",
+      "status": "Open",
+      "creator_user": {
+        "id": "u021",
+        "name": "Toby Blue",
+        "email": "toby.blue@example.com",
+        "password": "password1818",
+        "last_login_date": "2023-09-10T07:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc011",
+        "assigned_user": {
+          "id": "u022",
+          "name": "Uma Green",
+          "email": "uma.green@example.com",
+          "password": "password1919",
+          "last_login_date": "2023-09-09T08:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "HP Envy, 16GB RAM, 1TB SSD"
+      },
+      "request_type": "File Management"
+    },
+    {
+      "id": "12",
+      "title": "System Update Request",
+      "description": "User requests a system update.",
+      "creation_date": "2023-10-12T09:00:00Z",
+      "update_date": "2023-10-12T10:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u023",
+        "name": "Victor Red",
+        "email": "victor.red@example.com",
+        "password": "password2020",
+        "last_login_date": "2023-09-08T09:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc012",
+        "assigned_user": {
+          "id": "u024",
+          "name": "Wendy Yellow",
+          "email": "wendy.yellow@example.com",
+          "password": "password2121",
+          "last_login_date": "2023-09-07T10:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Dell Inspiron, 8GB RAM, 1TB HDD"
+      },
+      "request_type": "System Maintenance"
+    },
+    {
+      "id": "13",
+      "title": "Remote Access Request",
+      "description": "User needs remote access to their computer.",
+      "creation_date": "2023-10-13T11:00:00Z",
+      "update_date": "2023-10-13T12:00:00Z",
+      "impact": "Major",
+      "status": "In Progress",
+      "creator_user": {
+        "id": "u025",
+        "name": "Xander Purple",
+        "email": "xander.purple@example.com",
+        "password": "password2222",
+        "last_login_date": "2023-09-06T11:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc013",
+        "assigned_user": {
+          "id": "u026",
+          "name": "Yara Pink",
+          "email": "yara.pink@example.com",
+          "password": "password2323",
+          "last_login_date": "2023-09-05T12:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Asus ROG, 32GB RAM, 1TB SSD"
+      },
+      "request_type": "Remote Support"
+    },
+    {
+      "id": "14",
+      "title": "Database Access Request",
+      "description": "User needs access to the database.",
+      "creation_date": "2023-10-14T10:00:00Z",
+      "update_date": "2023-10-14T11:00:00Z",
+      "impact": "Major",
+      "status": "Open",
+      "creator_user": {
+        "id": "u027",
+        "name": "Zoe Gray",
+        "email": "zoe.gray@example.com",
+        "password": "password2424",
+        "last_login_date": "2023-09-04T13:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc014",
+        "assigned_user": {
+          "id": "u028",
+          "name": "Aaron Blue",
+          "email": "aaron.blue@example.com",
+          "password": "password2525",
+          "last_login_date": "2023-09-03T14:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "HP Spectre, 16GB RAM, 512GB SSD"
+      },
+      "request_type": "Access Request"
+    },
+    {
+      "id": "15",
+      "title": "User Training Request",
+      "description": "User requests training on new software.",
+      "creation_date": "2023-10-15T09:00:00Z",
+      "update_date": "2023-10-15T10:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u029",
+        "name": "Bella White",
+        "email": "bella.white@example.com",
+        "password": "password2626",
+        "last_login_date": "2023-09-02T15:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc015",
+        "assigned_user": {
+          "id": "u030",
+          "name": "Cody Black",
+          "email": "cody.black@example.com",
+          "password": "password2727",
+          "last_login_date": "2023-09-01T16:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Microsoft Surface Pro, 8GB RAM, 256GB SSD"
+      },
+      "request_type": "Training Request"
+    },
+    {
+      "id": "16",
+      "title": "System Performance Issue",
+      "description": "User reports slow system performance.",
+      "creation_date": "2023-10-16T10:00:00Z",
+      "update_date": "2023-10-16T11:00:00Z",
+      "impact": "Major",
+      "status": "In Progress",
+      "creator_user": {
+        "id": "u031",
+        "name": "Derek Green",
+        "email": "derek.green@example.com",
+        "password": "password2828",
+        "last_login_date": "2023-09-01T17:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc016",
+        "assigned_user": {
+          "id": "u032",
+          "name": "Ella Blue",
+          "email": "ella.blue@example.com",
+          "password": "password2929",
+          "last_login_date": "2023-08-31T18:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Lenovo Legion, 16GB RAM, 1TB SSD"
+      },
+      "request_type": "Performance Issue"
+    },
+    {
+      "id": "17",
+      "title": "Software Bug Report",
+      "description": "User reports a bug in the software.",
+      "creation_date": "2023-10-17T09:00:00Z",
+      "update_date": "2023-10-17T10:00:00Z",
+      "impact": "Blocking",
+      "status": "Open",
+      "creator_user": {
+        "id": "u033",
+        "name": "Fiona Yellow",
+        "email": "fiona.yellow@example.com",
+        "password": "password3030",
+        "last_login_date": "2023-08-30T19:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc017",
+        "assigned_user": {
+          "id": "u034",
+          "name": "George Red",
+          "email": "george.red@example.com",
+          "password": "password3131",
+          "last_login_date": "2023-08-29T20:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Acer Predator, 32GB RAM, 1TB SSD"
+      },
+      "request_type": "Bug Report"
+    },
+    {
+      "id": "18",
+      "title": "User Account Deactivation",
+      "description": "User requests account deactivation.",
+      "creation_date": "2023-10-18T14:00:00Z",
+      "update_date": "2023-10-18T15:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u035",
+        "name": "Hannah Green",
+        "email": "hannah.green@example.com",
+        "password": "password3232",
+        "last_login_date": "2023-08-28T21:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc018",
+        "assigned_user": {
+          "id": "u036",
+          "name": "Ian Blue",
+          "email": "ian.blue@example.com",
+          "password": "password3333",
+          "last_login_date": "2023-08-27T22:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "HP Omen, 16GB RAM, 512GB SSD"
+      },
+      "request_type": "Account Management"
+    },
+    {
+      "id": "19",
+      "title": "New User Setup",
+      "description": "Request to set up a new user account.",
+      "creation_date": "2023-10-19T10:00:00Z",
+      "update_date": "2023-10-19T11:00:00Z",
+      "impact": "Major",
+      "status": "Open",
+      "creator_user": {
+        "id": "u037",
+        "name": "Jackie Red",
+        "email": "jackie.red@example.com",
+        "password": "password3434",
+        "last_login_date": "2023-08-26T23:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc019",
+        "assigned_user": {
+          "id": "u038",
+          "name": "Kathy Yellow",
+          "email": "kathy.yellow@example.com",
+          "password": "password3535",
+          "last_login_date": "2023-08-25T00:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Dell Latitude, 8GB RAM, 256GB SSD"
+      },
+      "request_type": "User Setup"
+    },
+    {
+      "id": "20",
+      "title": "IT Policy Update",
+      "description": "User requests information on IT policy updates.",
+      "creation_date": "2023-10-20T09:00:00Z",
+      "update_date": "2023-10-20T10:00:00Z",
+      "impact": "Minor",
+      "status": "Resolved",
+      "creator_user": {
+        "id": "u039",
+        "name": "Leo Green",
+        "email": "leo.green@example.com",
+        "password": "password3636",
+        "last_login_date": "2023-08-24T01:00:00Z",
+        "active": "Yes",
+        "role": "user"
+      },
+      "computer": {
+        "id": "pc020",
+        "assigned_user": {
+          "id": "u040",
+          "name": "Megan Blue",
+          "email": "megan.blue@example.com",
+          "password": "password3737",
+          "last_login_date": "2023-08-23T02:00:00Z",
+          "active": "Yes",
+          "role": "intervenant"
+        },
+        "status": "In use",
+        "configuration": "Microsoft Surface Laptop, 16GB RAM, 512GB SSD"
+      },
+      "request_type": "Policy Inquiry"
+    }
+  ]
+}
