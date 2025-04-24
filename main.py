@@ -1,12 +1,9 @@
-from datetime import datetime, date, timedelta
 from typing import Union
 import uuid
-import urllib
 import uvicorn
 
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 
-from services.utils.data_services import load_data
 
 app = FastAPI()
 
@@ -22,6 +19,10 @@ def read_root(q: Union[str, None] = None):
 
 
 app.include_router(router)
+
+#créer le router pour les utilisateurs / users > user_api
+
+#créer le router pour les postes informatiques / devices > device_api
 
 
 if __name__ == "__main__":

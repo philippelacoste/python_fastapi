@@ -11,3 +11,9 @@ def load_data()->list:
     #on affecte la liste des tickets en provenance du fichier
     tickets:list = data['tickets']
     return tickets
+
+
+#unquement qd le fichier est appelé directement en cli
+if __name__ == "__main__":
+    data = load_data()
+    print("Hello", data)

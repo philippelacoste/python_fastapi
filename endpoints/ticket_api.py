@@ -67,3 +67,8 @@ class TicketRouter:
         
         # 6 renommer la méthode en getAllTicket
         # 7 créer une méthode getOneTicket(id:int)
+
+
+if __name__ == "__main__":
+    myrouter = TicketRouter()
+    print("Hello", myrouter.get_one_ticket(3))
