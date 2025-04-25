@@ -1,13 +1,19 @@
 
 from datetime import datetime
+import traceback
 from typing import Union
 from fastapi import APIRouter
-import urllib
+from fastapi.responses import JSONResponse
 
-from services.utils.data_services import load_data
+from models.exceptions import NoDataException, TicketAppException
+from models.user_model import UserModel
+from services.impl.user_service_impl import UserServiceImpl
+from services.ticket_service import IUserService
 from fastapi_restful.cbv import cbv
 
+from services.utils.data_services import DataFileLoadException
 
+user_service:IUserService = UserServiceImpl()
 
 router = APIRouter()
 
@@ -24,39 +30,38 @@ class UserRouter:
 
     @router.get("/user/{user_id}")
     def get_one_user(self,user_id: str):
-    
-        filtered_users:list=[]
-        #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
+        user:UserModel = None
 
-        for ticket in tickets:
-            if  ticket["creator_user"]["id"] == user_id:
-                filtered_users.append(ticket["creator_user"])
+        try:
+            user = user_service.getOneUser(user_id)
 
-        return filtered_users
+        except NoDataException as no_data_ex:
+            return JSONResponse(status_code=no_data_ex.http_code,
+                         content={
+                             "message":f"No user found with this id > {user_id}"
+                         })
+        except TicketAppException as app_exc:
+            return JSONResponse(status_code=app_exc.http_code,
+                         content={
+                             "message":f"Error during user search > {user_id}"
+                         })
+        except DataFileLoadException as df_exc:
+            return JSONResponse(status_code=df_exc.http_code,
+                         content={
+                             "message":f"Error while loading data > {user_id}"
+                         })
+        except Exception as exc:
+            return JSONResponse(status_code=500,
+                         content={
+                             "message":f"Unknown error > {traceback.format_exception_only(exc)}"
+                         })
+        return user
 
     @router.get("/user")
     def get_all_user(self,q: Union[str, None] = None):
-        date_compare:datetime
-        users:list=[]
-        filtered_users:list=[]
-
-        #parse q url parameters
-        # date_update=2023-10-05T14:00:00Z&user_id=3 >>>>>>>>  {'date_update': ['2023-10-05T14:00:00Z'], 'user_id': ['3']}
-        # params = urllib.parse.parse_qs(q)
-        # date_compare_str = params["date_update"][0]
-        # if date_compare_str:
-        #     date_compare:datetime = datetime.fromisoformat(date_compare_str)
-
-        #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
-
-        for ticket in tickets:
-            # date_creation:datetime =  datetime.fromisoformat(ticket["creation_date"])
-            # if date_compare.timestamp() > date_creation.timestamp():
-            users.append(ticket["creator_user"])
- 
-        filtered_users = users
+        filtered_users:list[UserModel]=[]     
+        
+        filtered_users = user_service.getAllUser()
 
         return filtered_users
 

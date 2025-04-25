@@ -5,7 +5,9 @@ from models.user_model import UserModel
 
 
 class ITicketService:
+
     def getAllTicket(criteria:TicketSearchCriteria) -> list[TicketModel]:
+        """Get all available tickets using criteria"""
         pass
 
     def getOneTicket(id:int) -> TicketModel:
@@ -20,6 +22,7 @@ class ITicketService:
 
 class IDeviceService:
     def getAllDevice() -> list[DeviceModel]:
+        """Get all available devices"""
         pass
 
     def getOneDevice(id:str) -> DeviceModel:

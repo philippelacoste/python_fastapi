@@ -6,6 +6,10 @@ import urllib
 
 from fastapi.responses import JSONResponse
 
+from models.ticket_model import TicketModel
+from models.ticket_search_criteria import TicketSearchCriteria
+from services.impl.ticket_service_impl import TicketServiceImpl
+from services.ticket_service import ITicketService
 from services.utils.data_services import DataFileLoadException, load_data
 from fastapi_restful.cbv import cbv
 
@@ -13,6 +17,7 @@ from fastapi_restful.cbv import cbv
 
 router = APIRouter()
 
+ticket_service:ITicketService = TicketServiceImpl()
 
 class TicketApplicationException(Exception):
     pass
@@ -31,43 +36,12 @@ class TicketRouter:
     @router.get("/ticket/{ticket_id}")
     def get_one_ticket(self,ticket_id: int):
     
-        filtered_tickets:list=[]
-        #recupération des données de tests depuis le fichier json
-        
-        try:
-            tickets:list = load_data()
-        except DataFileLoadException as data_exc:
-            response = JSONResponse(status_code=400,
-                         content={
-                            "message":"Erreur lors du chargement des données"
-                         }
-                         )
-            print("Erreur lors du chargement des données")
-        except Exception as exc:
-            response = JSONResponse(status_code=400,
-                         content={
-                            "message":"Erreur lors du chargement des données, exception non gérée"
-                         }
-                         )
-            print("exception non gérée lors du chargement des données")
-            return response
-
-        for ticket in tickets:
-            if  ticket["id"] == ticket_id.__str__():
-                filtered_tickets.append(ticket)
-
-        if filtered_tickets.__len__() == 0:
-            # raise TicketApplicationException("Erreur pas de tickets")
-            response = JSONResponse(status_code=404,
-                         content={
-                            "message":"Pas de ticket !"
-                         }
-                         )
-            print("Pas de ticket")
-            return response
+        ticket:TicketModel=None
+              
+        ticket = ticket_service.getOneTicket(ticket_id)
 
 
-        return filtered_tickets
+        return ticket
 
     @router.get("/ticket")
     def get_all_ticket(self,q: Union[str, None] = None):
@@ -80,14 +54,12 @@ class TicketRouter:
         date_compare_str = params["date_update"][0]
         if date_compare_str:
             date_compare:datetime = datetime.fromisoformat(date_compare_str)
+        
+        #add criteria
+        criteria:TicketSearchCriteria = TicketSearchCriteria()
+        criteria.creation_date = date_compare
 
-        #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
-
-        for ticket in tickets:
-            date_creation:datetime =  datetime.fromisoformat(ticket["creation_date"])
-            if date_compare.timestamp() > date_creation.timestamp():
-                filtered_tickets.append(ticket)
+        filtered_tickets = ticket_service.getAllTicket(criteria)
 
         return filtered_tickets
 

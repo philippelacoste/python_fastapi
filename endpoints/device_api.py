@@ -1,19 +1,20 @@
-from datetime import datetime
 from typing import Union
 from fastapi import APIRouter
-import urllib
+from fastapi.responses import JSONResponse
 
+from models.device_model import DeviceModel
+from models.exceptions import TicketAppException
 from services.impl.device_service_impl import DeviceServiceImpl
 from services.ticket_service import IDeviceService
-from services.utils.data_services import load_data
 from fastapi_restful.cbv import cbv
 
-
+device_service:IDeviceService = DeviceServiceImpl()
 
 router = APIRouter()
 
 @cbv(router)
 class UserRouter:
+
 
     @router.post("/device")
     def add_device(self,device):
@@ -23,26 +24,30 @@ class UserRouter:
     def update_device(self,device):
         print("update_device")
 
+
     @router.get("/device/{device_id}")
     def get_one_device(self,device_id: str):
     
-        devices:list=[]
-        #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
+        device:DeviceModel = None
+        device = device_service.getOneDevice(device_id)
 
-        for ticket in tickets:
-            if  ticket["computer"]["id"] == device_id:
-                devices.append(ticket["computer"])
+        return device
 
-        return devices
 
     @router.get("/device")
     def get_all_device(self,q: Union[str, None] = None):
         
         filtered_devices:list=[]
-        device_service:IDeviceService = DeviceServiceImpl()
-        filtered_devices = device_service.getAllDevice()
-    
+        
+        try:
+            filtered_devices = device_service.getAllDevice()
+        except TicketAppException as tick_app_ex:
+            #erreur gérée dans mes services, déjà détaillée
+            return JSONResponse(status_code=400)
+        except Exception as ex:
+            #erreurs non gérées à détailler
+            return JSONResponse(status_code=500)
+
         return filtered_devices
 
 

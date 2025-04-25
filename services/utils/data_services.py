@@ -1,8 +1,10 @@
 import json
 
+from models.exceptions import TicketAppException
+
 sample_data_filepath = "./data/sample_data.json"
 
-class DataFileLoadException(Exception):
+class DataFileLoadException(TicketAppException):
     pass
 
 def load_data()->list:

@@ -21,9 +21,18 @@ class DeviceServiceImpl(IDeviceService):
         return devices
 
     @override
-    def getOneDevice(id:str) -> DeviceModel:
-        #ICI le code qui récupère les données d'un device
-        pass
+    def getOneDevice(self,id:str) -> DeviceModel:
+          #recupération des données de tests depuis le fichier json
+        tickets:list = load_data()
+        device_model= None
+
+        for ticket in tickets:
+            if  ticket["computer"]["id"] == id:
+                device_model = ticket["computer"]
+                return device_model
+        #raise exception typée
+        #soit je renvoie un champ nul et je laisse gérer l'appelant
+        return device_model
 
     @override
     def addDevice(DeviceModel) -> str:
@@ -36,3 +45,8 @@ class DeviceServiceImpl(IDeviceService):
     @override
     def removeDevice(id:str) -> str:
         pass
+
+
+if __name__ == "__main__":
+    service = DeviceServiceImpl()
+    print("Hello", service.getOneDevice("pc006"))
