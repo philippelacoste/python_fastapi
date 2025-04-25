@@ -3,6 +3,8 @@ from typing import Union
 from fastapi import APIRouter
 import urllib
 
+from services.impl.device_service_impl import DeviceServiceImpl
+from services.ticket_service import IDeviceService
 from services.utils.data_services import load_data
 from fastapi_restful.cbv import cbv
 
@@ -36,27 +38,11 @@ class UserRouter:
 
     @router.get("/device")
     def get_all_device(self,q: Union[str, None] = None):
-        date_compare:datetime
-        tickets:list=[]
-        devices:list=[]
+        
         filtered_devices:list=[]
-
-        #parse q url parameters
-        # date_update=2023-10-05T14:00:00Z&device_id=3 >>>>>>>>  {'date_update': ['2023-10-05T14:00:00Z'], 'device_id': ['3']}
-        # params = urllib.parse.parse_qs(q)
-        # date_compare_str = params["date_update"][0]
-        # if date_compare_str:
-        #     date_compare:datetime = datetime.fromisoformat(date_compare_str)
-
-        #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
-
-        for ticket in tickets:
-                device = ticket["computer"]
-            # date_creation:datetime =  datetime.fromisoformat(device["creation_date"])
-            # if date_compare.timestamp() > date_creation.timestamp():
-                devices.append(device)
-        filtered_devices = devices
+        device_service:IDeviceService = DeviceServiceImpl()
+        filtered_devices = device_service.getAllDevice()
+    
         return filtered_devices
 
 
