@@ -4,9 +4,11 @@ import traceback
 from typing import Union
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
+import urllib
 
-from models.exceptions import NoDataException, TicketAppException
+from models.exceptions import NoDataException, NotImplementedException, TicketAppException
 from models.user_model import UserModel
+from models.user_search_criteria import UserSearchCriteria
 from services.impl.user_service_impl import UserServiceImpl
 from services.ticket_service import IUserService
 from fastapi_restful.cbv import cbv
@@ -22,11 +24,25 @@ class UserRouter:
 
     @router.post("/user")
     def add_user(self,user):
-        print("add_user")
+        my_user:UserModel = user
+        try:
+            user_service.addUser(my_user)
+        except NotImplementedException as no_data_ex:
+            JSONResponse(status_code=no_data_ex.http_code,
+                         content={
+                             "message":f"Method not implemented {__name__}"
+                         })
 
     @router.put("/user")
     def update_user(self,user):
-        print("update_user")
+        my_user:UserModel = user
+        try:
+            user_service.updateUser(my_user)
+        except NotImplementedException as no_data_ex:
+            JSONResponse(status_code=no_data_ex.http_code,
+                         content={
+                             "message":f"Method not implemented {__name__}"
+                         })
 
     @router.get("/user/{user_id}")
     def get_one_user(self,user_id: str):
@@ -59,9 +75,22 @@ class UserRouter:
 
     @router.get("/user")
     def get_all_user(self,q: Union[str, None] = None):
-        filtered_users:list[UserModel]=[]     
+
+
         
-        filtered_users = user_service.getAllUser()
+        filtered_users:list[UserModel]=[]
+        #parse q url parameters
+        # date_update=2023-10-05T14:00:00Z&status=Open >>>>>>>>  {'date_update': ['2023-10-05T14:00:00Z'], 'user_id': ['3']}
+        params = urllib.parse.parse_qs(q)
+        if params :
+            #add criteria
+            criteria = UserSearchCriteria()
+            if 'name' in params:
+                criteria.status = params["name"][0]
+
+        criteria = UserSearchCriteria()
+        
+        filtered_users = user_service.getAllUser(criteria)
 
         return filtered_users
 

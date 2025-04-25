@@ -1,11 +1,14 @@
 
 from datetime import datetime
+import traceback
 from typing import Union
 from fastapi import APIRouter
 import urllib
 
 from fastapi.responses import JSONResponse
 
+from models.enums import IMPACT, TICKET_STATUS
+from models.exceptions import NoDataException, TicketAppException
 from models.ticket_model import TicketModel
 from models.ticket_search_criteria import TicketSearchCriteria
 from services.impl.ticket_service_impl import TicketServiceImpl
@@ -38,41 +41,64 @@ class TicketRouter:
     
         ticket:TicketModel=None
               
-        ticket = ticket_service.getOneTicket(ticket_id)
+        try:
+            ticket = ticket_service.getOneTicket(ticket_id)
 
-
-        return ticket
+        except NoDataException as no_data_ex:
+            return JSONResponse(status_code=no_data_ex.http_code,
+                         content={
+                             "message":f"No ticket found with this id > {ticket_id}"
+                         })
+        except TicketAppException as app_exc:
+            return JSONResponse(status_code=app_exc.http_code,
+                         content={
+                             "message":f"Error during ticket search > {ticket_id}"
+                         })
+        except DataFileLoadException as df_exc:
+            return JSONResponse(status_code=df_exc.http_code,
+                         content={
+                             "message":f"Error while loading data > {ticket_id}"
+                         })
+        except Exception as exc:
+            return JSONResponse(status_code=500,
+                         content={
+                             "message":f"Unknown error > {traceback.format_exception_only(exc)}"
+                         })
+       
+        # ou return ticket
+        return JSONResponse(status_code=200,
+                         content={
+                             "ticket": ticket
+                         })
 
     @router.get("/ticket")
     def get_all_ticket(self,q: Union[str, None] = None):
         date_compare:datetime
         filtered_tickets:list=[]
-
+        criteria:TicketSearchCriteria = None
         #parse q url parameters
-        # date_update=2023-10-05T14:00:00Z&user_id=3 >>>>>>>>  {'date_update': ['2023-10-05T14:00:00Z'], 'user_id': ['3']}
+        # date_update=2023-10-05T14:00:00Z&status=Open >>>>>>>>  {'date_update': ['2023-10-05T14:00:00Z'], 'user_id': ['3']}
         params = urllib.parse.parse_qs(q)
-        date_compare_str = params["date_update"][0]
-        if date_compare_str:
-            date_compare:datetime = datetime.fromisoformat(date_compare_str)
-        
-        #add criteria
-        criteria:TicketSearchCriteria = TicketSearchCriteria()
-        criteria.creation_date = date_compare
+        if params :
+            #add criteria
+            criteria = TicketSearchCriteria()
+            if 'date_update' in params:
+                date_compare_str = params["date_update"][0]
+                if date_compare_str:
+                    date_compare:datetime = datetime.fromisoformat(date_compare_str)
+                    criteria.creation_date = date_compare
+
+            if 'status' in params:
+                status_compare:TICKET_STATUS = TICKET_STATUS(params["status"][0])
+                criteria.status = status_compare
+
+            if 'impact' in params:
+                impact_compare:IMPACT = IMPACT(params["impact"][0])
+                criteria.impact = impact_compare
 
         filtered_tickets = ticket_service.getAllTicket(criteria)
 
         return filtered_tickets
-
-        
-        # 1 identifier uniquement les dates inférieur à la date entrée
-        # 2 mettre la date comme paramètre à la méthode de service
-
-        # 3 extraire dans une méthode (def) le chargement des tickets
-        # 4 retourner la liste filtrée
-        # 5 gérer le paramètre q 
-        
-        # 6 renommer la méthode en getAllTicket
-        # 7 créer une méthode getOneTicket(id:int)
 
 
 if __name__ == "__main__":

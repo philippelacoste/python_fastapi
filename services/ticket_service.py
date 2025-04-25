@@ -1,4 +1,5 @@
 from models.device_model import DeviceModel
+from models.exceptions import NotImplementedException
 from models.ticket_model import TicketModel
 from models.ticket_search_criteria import TicketSearchCriteria
 from models.user_model import UserModel
@@ -45,10 +46,10 @@ class IUserService:
     def getOneUser(id:str) -> UserModel:
         pass
 
-    def addUser(UserModel) -> str:
-        pass
+    def addUser(user:UserModel) -> str:
+        raise NotImplementedException()
 
-    def updateUser(UserModel) -> UserModel:
+    def updateUser(user:UserModel) -> UserModel:
         pass
 
     def removeUser(id:str) -> str:

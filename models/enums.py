@@ -7,7 +7,7 @@ class DEVICE_STATUS(str,Enum):
     ORDER_INP_ROGRESS = "OrderInProgress"
 
 class TICKET_STATUS(str,Enum):
-    OPEN = "Blocking"
+    OPEN = "Open"
     IN_PROGRESS = "InProgress"
     RESOLVED = "Resolved"
     CLOSED = "Closed"

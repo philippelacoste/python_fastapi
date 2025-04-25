@@ -4,6 +4,7 @@ from log.decorators import log_method
 from models.device_model import DeviceModel
 from models.exceptions import NoDataException
 from models.user_model import UserModel
+from models.user_search_criteria import UserSearchCriteria
 from services.ticket_service import  IUserService
 from services.utils.data_services import load_data
 
@@ -12,12 +13,16 @@ class UserServiceImpl(IUserService):
     
     @log_method
     @override
-    def getAllUser(self) -> list[UserModel]:
+    def getAllUser(self, criteria:UserSearchCriteria) -> list[UserModel]:
         users:list[UserModel] = []
         tickets:list = load_data()
 
         for ticket in tickets:
             users.append(ticket["creator_user"])
+            
+        if criteria and criteria.name != "":
+            filtered_users = filter(lambda user: user["name"] == criteria.name ,users)
+            return list(filtered_users)
 
         return users
     
