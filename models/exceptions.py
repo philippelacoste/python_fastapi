@@ -10,7 +10,7 @@ class TicketAppException(Exception):
 
 
 class NotImplementedException(TicketAppException):
-    pass
+    http_code:int = 302
 
 
 class NoDataException(TicketAppException):
