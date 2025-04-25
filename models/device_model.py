@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from models.enums import IMPACT
+from models.enums import DEVICE_STATUS
 
 
 class DeviceModel:
@@ -8,4 +8,4 @@ class DeviceModel:
     title:str = ""
     description:str = ""
     creation_date:datetime
-    impact:IMPACT = IMPACT.BLOCKING
+    status:DEVICE_STATUS = DEVICE_STATUS.IN_USE
