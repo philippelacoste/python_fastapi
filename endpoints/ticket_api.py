@@ -4,12 +4,18 @@ from typing import Union
 from fastapi import APIRouter
 import urllib
 
-from services.utils.data_services import load_data
+from fastapi.responses import JSONResponse
+
+from services.utils.data_services import DataFileLoadException, load_data
 from fastapi_restful.cbv import cbv
 
 
 
 router = APIRouter()
+
+
+class TicketApplicationException(Exception):
+    pass
 
 @cbv(router)
 class TicketRouter:
@@ -27,11 +33,39 @@ class TicketRouter:
     
         filtered_tickets:list=[]
         #recupération des données de tests depuis le fichier json
-        tickets:list = load_data()
+        
+        try:
+            tickets:list = load_data()
+        except DataFileLoadException as data_exc:
+            response = JSONResponse(status_code=400,
+                         content={
+                            "message":"Erreur lors du chargement des données"
+                         }
+                         )
+            print("Erreur lors du chargement des données")
+        except Exception as exc:
+            response = JSONResponse(status_code=400,
+                         content={
+                            "message":"Erreur lors du chargement des données, exception non gérée"
+                         }
+                         )
+            print("exception non gérée lors du chargement des données")
+            return response
 
         for ticket in tickets:
             if  ticket["id"] == ticket_id.__str__():
                 filtered_tickets.append(ticket)
+
+        if filtered_tickets.__len__() == 0:
+            # raise TicketApplicationException("Erreur pas de tickets")
+            response = JSONResponse(status_code=404,
+                         content={
+                            "message":"Pas de ticket !"
+                         }
+                         )
+            print("Pas de ticket")
+            return response
+
 
         return filtered_tickets
 
@@ -71,4 +105,4 @@ class TicketRouter:
 
 if __name__ == "__main__":
     myrouter = TicketRouter()
-    print("Hello", myrouter.get_one_ticket(3))
+    print("Hello", myrouter.get_one_ticket(33))

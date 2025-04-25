@@ -7,7 +7,9 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-from endpoints.ticket_api import router
+from endpoints.ticket_api import router as ticket_router
+from endpoints.user_api import router as user_router
+from endpoints.device_api import router as device_router
 
 
 @app.get("/")
@@ -18,7 +20,9 @@ def read_root(q: Union[str, None] = None):
         return {f"Hello {q}": f"World 'Synchrone' { my_uuid.__str__() }"}
 
 
-app.include_router(router)
+app.include_router(ticket_router)
+app.include_router(user_router)
+app.include_router(device_router)
 
 #créer le router pour les utilisateurs / users > user_api
 
