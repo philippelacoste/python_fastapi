@@ -20,6 +20,12 @@ def load_data()->list:
     return tickets
 
 
+def save_data(new_tickets):
+        export = {"tickets" : []}
+        export["tickets"] = new_tickets
+        with open(sample_data_filepath, "w", encoding="utf-8") as f:
+            f.write(json.dumps(export))
+
 #unquement qd le fichier est appelé directement en cli
 if __name__ == "__main__":
     data = load_data()

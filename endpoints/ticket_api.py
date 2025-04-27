@@ -6,11 +6,14 @@ from fastapi import APIRouter
 import urllib
 
 from fastapi.responses import JSONResponse
+from pydantic import Field
 
+from models.device_model import DeviceModel
 from models.enums import IMPACT, TICKET_STATUS
 from models.exceptions import NoDataException, TicketAppException
 from models.ticket_model import TicketModel
 from models.ticket_search_criteria import TicketSearchCriteria
+from models.user_model import UserModel
 from services.impl.ticket_service_impl import TicketServiceImpl
 from services.ticket_service import ITicketService
 from services.utils.data_services import DataFileLoadException, load_data
@@ -25,16 +28,29 @@ ticket_service:ITicketService = TicketServiceImpl()
 class TicketApplicationException(Exception):
     pass
 
+class TicketSchema(TicketModel):
+    id:int = Field(-1)
+    title:str=Field("")
+    description:str=Field("")
+    creation_date:datetime = Field(None)
+    update_date:datetime = Field(None)
+    impact:IMPACT = Field(IMPACT.MAJOR)
+    status:TICKET_STATUS= Field(TICKET_STATUS.IN_PROGRESS)
+    # creator_user:UserModel=Field(None)
+    # computer:DeviceModel=Field(None)
+    request_type:str=Field("")
+
 @cbv(router)
 class TicketRouter:
 
     @router.post("/ticket")
     def add_ticket(self,ticket):
+       
         print("add_ticket")
 
     @router.put("/ticket")
-    def update_ticket(self,ticket):
-        print("update_ticket")
+    def update_ticket(self,ticket:TicketSchema):
+        ticket_service.updateTicket(ticket)
 
     @router.get("/ticket/{ticket_id}")
     def get_one_ticket(self,ticket_id: int):

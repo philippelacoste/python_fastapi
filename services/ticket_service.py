@@ -14,10 +14,10 @@ class ITicketService:
     def getOneTicket(id:int) -> TicketModel:
         pass
 
-    def addTicket(TicketModel) -> int:
+    def addTicket(ticket:TicketModel) -> int:
         pass
 
-    def updateTicket(TicketModel) -> TicketModel:
+    def updateTicket(ticket:TicketModel) -> TicketModel:
         pass
 
 

@@ -7,7 +7,7 @@ from models.ticket_search_criteria import TicketSearchCriteria
 from services.ticket_service import ITicketService
 from typing_extensions import override
 
-from services.utils.data_services import load_data
+from services.utils.data_services import load_data, save_data
 
 class TicketServiceImpl(ITicketService):
 
@@ -70,21 +70,44 @@ class TicketServiceImpl(ITicketService):
         tickets:list = load_data()
 
         for ticket in tickets:
-            if  ticket["id"] == id.__str__():
+            
+            if  ticket["id"].__str__() == id.__str__():
                 ticket_model = ticket
                 return ticket_model
         #TODO:raise exception
         return ticket_model
     
     @override
-    def addTicket(self,ticket:TicketModel) -> int:
-        pass
+    def addTicket(self,ticket_model:TicketModel) -> int:
+       pass
 
     @override
-    def updateTicket(self,ticket:TicketModel) -> TicketModel:
-        pass
+    def updateTicket(self,ticket_model:TicketModel) -> TicketModel:
+
+        tickets = load_data()
+        new_tickets=[]
+        for ticket in tickets:
+            if ticket["id"] == ticket_model.id.__str__():
+                ticket = ticket_model.__dict__
+                ticket["creation_date"] = ticket_model.creation_date.isoformat() if ticket_model.creation_date else ""
+                ticket["update_date"] = ticket_model.update_date.isoformat() if ticket_model.update_date else ""
+
+            new_tickets.append(ticket)
+
+        #TODO : try /catch
+        save_data(new_tickets)
+       
+        return ticket_model
+
+   
  
 if __name__ == "__main__":
     service = TicketServiceImpl()
+    model:TicketModel = TicketModel()
+    model.id=2
+    model.title="test"
+    model.description="test description"
+    model.creation_date = datetime.now()
+    model.update_date = datetime.now()
 
-    print("Hello", service.getAllTicket())
+    print("Hello", service.getOneTicket(2))
